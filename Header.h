@@ -28,8 +28,8 @@
 #include "Draw_window.hpp"
 #include "toolbox.hpp"
 #include "utility_f.hpp"
-#include "Layer.hpp"
-#include "FFN.hpp"
+#include "neural_network/Layer.hpp"
+#include "neural_network/FFN.hpp"
 
 
 #endif /* Header_h */

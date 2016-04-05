@@ -7,12 +7,13 @@ int main()
     FFN *DIGITnetwork = new FFN();
     DIGITnetwork->initFFN(44, 10, 10);
     
-    vector<vector<float>> Xapp = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/Xapp.txt");
-    vector<vector<float>> Ta = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/TA.txt");
-    vector<vector<float>> Xtest = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/Xtest.txt");
-    vector<vector<float>> Tt = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/TT.txt");
+    vector<vector<float>> Xapp = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/Xapp.txt");
+    vector<vector<float>> Ta = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/TA.txt");
+    vector<vector<float>> Xtest = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/Xtest.txt");
+    vector<vector<float>> Tt = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/TT.txt");
     cout << "Training Neural Network... Please Wait..." << endl;
     DIGITnetwork->train_by_iteration(Xapp,Ta,2000);
+    DIGITnetwork->test(Xtest,Tt);
     
     while(1){
         Draw_window *w = new Draw_window();

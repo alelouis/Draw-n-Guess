@@ -257,8 +257,8 @@ vector<float> extract_variables(deque<deque<int>> img){
 }
 
 vector<float> normalize(vector<float> origin_variables){
-    vector<vector<float>> mu = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/mu.txt");
-    vector<vector<float>> sigma = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/sigma.txt");
+    vector<vector<float>> mu = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/mu.txt");
+    vector<vector<float>> sigma = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/sigma.txt");
     vector<float> norm_variables;
     for(int i=0;i<mu[0].size();i++){
         norm_variables.push_back((origin_variables[i]-mu[0][i])/sigma[0][i]);
@@ -267,7 +267,7 @@ vector<float> normalize(vector<float> origin_variables){
 }
 
 vector<float> pca(vector<float> origin_variables){
-    vector<vector<float>> pca = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/coef.txt");
+    vector<vector<float>> pca = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/coef.txt");
     vector<float> pca_variables;
     float sumProjection=0;
     for(int i=0; i<pca.size();i++){
