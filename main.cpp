@@ -4,8 +4,6 @@ using namespace std;
 int main()
 {
     
-    
-    
     FFN *DIGITnetwork = new FFN();
     DIGITnetwork->initFFN(44, 10, 10);
     
