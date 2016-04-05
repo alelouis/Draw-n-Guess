@@ -32,6 +32,30 @@ vector<vector<float>> readMatFromFile(string str){
     return matAPP;
 }
 
+deque<deque<int>> readMatFromFileDeq(string str){
+    deque<deque<int>> matAPP;
+    deque<int> lineAPP;
+    int x;
+    string line;
+    ifstream APP;
+    APP.open(str, ios::in);
+    std::deque<int> v;
+    
+    while (std::getline(APP, line))
+    {
+        std::istringstream iss(line);
+        int n;
+        while (iss >> n)
+        {
+            lineAPP.push_back(n);
+        }
+        matAPP.push_back(lineAPP);
+        lineAPP.clear();
+    }
+    
+    return matAPP;
+}
+
 sf::Text text;
 sf::Font font;
 sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize){

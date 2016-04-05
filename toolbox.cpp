@@ -27,6 +27,10 @@ deque<deque<int>> compress_mat(deque<deque<int>> src_mat){
             somme = 0;
         }
     }
+    for(int i=0;i<8;i++){
+        compr_mat[i][7] = 0;
+        compr_mat[7][i] = 0;
+    }
     return compr_mat;
 }
 
@@ -42,8 +46,22 @@ void affiche_mat(deque<deque<int>> mat, int lignes, int colonnes){
     }
 }
 
-deque<deque<int>> transpose_mat(deque<deque<int>> src_mat){
-    deque<deque<int>> t_mat;
+vector<vector<float>> transpose_mat_float(vector<vector<float>> src_mat){
+    vector<vector<float>> t_mat;
+    t_mat.resize(src_mat.size());
+    for (int i=0; i<src_mat.size(); i++){
+        t_mat[i].resize(src_mat[0].size());
+    }
+    for(int i=0;i<src_mat.size();i++){
+        for(int j=0;j<src_mat[i].size();j++){
+            t_mat[i][j] = src_mat[j][i];
+        }
+    }
+    return t_mat;
+}
+
+vector<vector<int>> transpose_mat_int(vector<vector<int>> src_mat){
+    vector<vector<int>> t_mat;
     t_mat.resize(src_mat.size());
     for (int i=0; i<src_mat.size(); i++){
         t_mat[i].resize(src_mat[0].size());
@@ -128,7 +146,7 @@ deque<deque<int>> center_mat(deque<deque<int>> src_mat){
     return src_mat;
 }
 
-deque<deque<int>> mirror_mat(deque<deque<int>> src_mat){
+deque<deque<int>> mirror_mat_vertical(deque<deque<int>> src_mat){
     deque<deque<int>> m_mat;
     m_mat.resize(src_mat.size());
     for (int i=0; i<src_mat.size(); i++){
@@ -142,9 +160,24 @@ deque<deque<int>> mirror_mat(deque<deque<int>> src_mat){
     return m_mat;
 }
 
+deque<deque<int>> mirror_mat_horizontal(deque<deque<int>> src_mat){
+    deque<deque<int>> m_mat;
+    m_mat.resize(src_mat.size());
+    for (int i=0; i<src_mat.size(); i++){
+        m_mat[i].resize(src_mat.size());
+    }
+    for(int i=0;i<src_mat.size();i++){
+        for(int j=0;j<src_mat.size();j++){
+            m_mat[i][j] = src_mat[src_mat.size()-1-i][j];
+        }
+    }
+    return m_mat;
+}
+
 vector<float> extract_variables(deque<deque<int>> img){
     vector<float> variables;
-    deque<deque<int>> m_img = mirror_mat(img);
+    vector<float> variables_temp_pi;
+    deque<deque<int>> m_img = mirror_mat_horizontal(img);
     int sumHist = 0;
     
     //Horizontal Histogram
@@ -169,18 +202,24 @@ vector<float> extract_variables(deque<deque<int>> img){
         for (int j = z; j <= i - z; ++j) {
             sumHist+=img[j][i - j];
         }
-        variables.push_back(sumHist);
+        variables_temp_pi.push_back(sumHist);
         sumHist = 0;
     }
+    reverse(variables_temp_pi.begin(),variables_temp_pi.end());
+    variables.insert(variables.end(),variables_temp_pi.begin(),variables_temp_pi.end());
+    variables_temp_pi.clear();
     //-pi/4 Histogram
     for (int i = 0; i < 2 * 8 - 1; ++i) {
         int z = i < 8 ? 0 : i - 8 + 1;
         for (int j = z; j <= i - z; ++j) {
             sumHist+=m_img[j][i - j];
         }
-        variables.push_back(sumHist);
+        variables_temp_pi.push_back(sumHist);
         sumHist = 0;
     }
+    reverse(variables_temp_pi.begin(),variables_temp_pi.end());
+    variables.insert(variables.end(),variables_temp_pi.begin(),variables_temp_pi.end());
+    
     //quadrans
     for(int i=0;i<2;i++){
         for(int j=0;j<2;j++){
@@ -197,13 +236,14 @@ vector<float> extract_variables(deque<deque<int>> img){
     for(int i=0;i<img.size();i++){
         for(int j=0;j<img.size();j++){
             if(img[i][j]){
-                sumHist+=1;
+                sumHist+=img[i][j];
             }
         }
     }
-    variables.push_back(sumHist/64.0);
+    variables.push_back(sumHist/1024.0);
     
     //Deletes useless variables (all zero)
+    
     variables.erase(variables.begin() + 45);
     variables.erase(variables.begin() + 31);
     variables.erase(variables.begin() + 30);
@@ -211,6 +251,7 @@ vector<float> extract_variables(deque<deque<int>> img){
     variables.erase(variables.begin() + 16);
     variables.erase(variables.begin() + 15);
     variables.erase(variables.begin() + 7);
+    
 
     return variables;
 }
@@ -231,7 +272,7 @@ vector<float> pca(vector<float> origin_variables){
     float sumProjection=0;
     for(int i=0; i<pca.size();i++){
         for(int j=0;j<pca[0].size();j++){
-            sumProjection+=origin_variables[i]*pca[j][i];
+            sumProjection+=origin_variables[j]*pca[j][i];
         }
         pca_variables.push_back(sumProjection);
         sumProjection=0;

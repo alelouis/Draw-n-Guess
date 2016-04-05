@@ -48,6 +48,7 @@ Draw_window::Draw_window(){
                 if (event.key.code == sf::Keyboard::Space)
                 {
                     active = false;
+                    window->close();
                 }
             }
             if (event.type == sf::Event::MouseButtonReleased){

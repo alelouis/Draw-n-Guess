@@ -13,6 +13,7 @@
 using namespace std;
 
 vector<vector<float>> readMatFromFile(string str);
+deque<deque<int>> readMatFromFileDeq(string str);
 sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize);
 
 #endif /* utility_f_hpp */
