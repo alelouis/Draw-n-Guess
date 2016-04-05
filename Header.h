@@ -15,7 +15,8 @@
 #include <deque>
 #include <cmath>
 #include <iomanip>
-
+#include <fstream>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -23,5 +24,6 @@
 
 #include "Draw_window.hpp"
 #include "toolbox.hpp"
+#include "utility_f.hpp"
 
 #endif /* Header_h */
