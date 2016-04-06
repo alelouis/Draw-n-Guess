@@ -9,5 +9,5 @@ Hit space to submit to network
 Build with SFML
 ```
 
-![alt tag](http://i.imgur.com/3bQxUyW.png)
+![alt tag](https://zippy.gfycat.com/FairUncomfortableDesertpupfish.gif)
 
