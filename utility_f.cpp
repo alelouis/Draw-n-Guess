@@ -15,20 +15,26 @@ vector<vector<float>> readMatFromFile(string str){
     string line;;
     ifstream APP;
     APP.open(str, ios::in);
-    std::vector<int> v;
-    
-    while (std::getline(APP, line))
+
+    if (!APP)
+        std::cout << "Cannot open file \"" << str << "\"" << std::endl;
+    else
     {
-        std::istringstream iss(line);
-        float n;
-        while (iss >> n)
+        std::vector<int> v;
+
+        while (std::getline(APP, line))
         {
-            lineAPP.push_back(n);
+            std::istringstream iss(line);
+            float n;
+            while (iss >> n)
+            {
+                lineAPP.push_back(n);
+            }
+            matAPP.push_back(lineAPP);
+            lineAPP.clear();
         }
-        matAPP.push_back(lineAPP);
-        lineAPP.clear();
     }
-    
+
     return matAPP;
 }
 
@@ -40,7 +46,7 @@ deque<deque<int>> readMatFromFileDeq(string str){
     ifstream APP;
     APP.open(str, ios::in);
     std::deque<int> v;
-    
+
     while (std::getline(APP, line))
     {
         std::istringstream iss(line);
@@ -52,20 +58,20 @@ deque<deque<int>> readMatFromFileDeq(string str){
         matAPP.push_back(lineAPP);
         lineAPP.clear();
     }
-    
+
     return matAPP;
 }
 
 sf::Text text;
 sf::Font font;
 sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize){
-    
-    font.loadFromFile("/Library/Fonts/arial.ttf");
+
+    font.loadFromFile("font.otf");
     text.setFont(font);
     text.setCharacterSize(charSize);
     text.setOrigin(-xOrigin, -yOrigin);
     text.setColor(sf::Color(0, 0, 0));
     text.setString(str);
-    
+
     return text;
 }

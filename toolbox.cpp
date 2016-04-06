@@ -41,8 +41,8 @@ void affiche_mat(deque<deque<int>> mat, int lignes, int colonnes){
             cout << mat[i][j];
         }
         cout << '\n';
-   
-    
+
+
     }
 }
 
@@ -125,7 +125,7 @@ deque<deque<int>> center_mat(deque<deque<int>> src_mat){
             }
         }
     }
-    
+
     delta_x = (marge_droite-marge_gauche)/2;
     delta_y = (marge_bas-marge_haut)/2;
     vec_zero.resize(src_mat.size());
@@ -142,7 +142,7 @@ deque<deque<int>> center_mat(deque<deque<int>> src_mat){
         }
         src_mat[i].resize(temp_size);
     }
-    
+
     return src_mat;
 }
 
@@ -179,7 +179,7 @@ vector<float> extract_variables(deque<deque<int>> img){
     vector<float> variables_temp_pi;
     deque<deque<int>> m_img = mirror_mat_horizontal(img);
     int sumHist = 0;
-    
+
     //Horizontal Histogram
     for(int i=0;i<img.size();i++){
         for(int j=0;j<img.size();j++){
@@ -219,7 +219,7 @@ vector<float> extract_variables(deque<deque<int>> img){
     }
     reverse(variables_temp_pi.begin(),variables_temp_pi.end());
     variables.insert(variables.end(),variables_temp_pi.begin(),variables_temp_pi.end());
-    
+
     //quadrans
     for(int i=0;i<2;i++){
         for(int j=0;j<2;j++){
@@ -241,9 +241,9 @@ vector<float> extract_variables(deque<deque<int>> img){
         }
     }
     variables.push_back(sumHist/1024.0);
-    
+
     //Deletes useless variables (all zero)
-    
+
     variables.erase(variables.begin() + 45);
     variables.erase(variables.begin() + 31);
     variables.erase(variables.begin() + 30);
@@ -251,14 +251,14 @@ vector<float> extract_variables(deque<deque<int>> img){
     variables.erase(variables.begin() + 16);
     variables.erase(variables.begin() + 15);
     variables.erase(variables.begin() + 7);
-    
+
 
     return variables;
 }
 
 vector<float> normalize(vector<float> origin_variables){
-    vector<vector<float>> mu = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/mu.txt");
-    vector<vector<float>> sigma = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/sigma.txt");
+    vector<vector<float>> mu = readMatFromFile("data_set/mu.txt");
+    vector<vector<float>> sigma = readMatFromFile("data_set/sigma.txt");
     vector<float> norm_variables;
     for(int i=0;i<mu[0].size();i++){
         norm_variables.push_back((origin_variables[i]-mu[0][i])/sigma[0][i]);
@@ -267,7 +267,7 @@ vector<float> normalize(vector<float> origin_variables){
 }
 
 vector<float> pca(vector<float> origin_variables){
-    vector<vector<float>> pca = readMatFromFile("/Users/Alexis/Documents/SFML/Draw-n-Guess/sfmlMac/data_set/coef.txt");
+    vector<vector<float>> pca = readMatFromFile("data_set/coef.txt");
     vector<float> pca_variables;
     float sumProjection=0;
     for(int i=0; i<pca.size();i++){
@@ -277,6 +277,9 @@ vector<float> pca(vector<float> origin_variables){
         pca_variables.push_back(sumProjection);
         sumProjection=0;
     }
+
+    std::cout << "ok" << std::endl;
+
     return pca_variables;
 }
 

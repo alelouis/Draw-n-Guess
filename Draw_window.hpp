@@ -21,7 +21,7 @@ public:
     void run();
     void set_active(bool b);
     void set_guess_text(string str);
-    
+
 private:
     sf::RenderWindow *window;
     sf::Texture *draw_zone_tex;

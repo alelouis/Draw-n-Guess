@@ -9,7 +9,7 @@
 #ifndef Layer_hpp
 #define Layer_hpp
 
-#include "Header.h"
+#include "../Header.h"
 
 using namespace std;
 class FFN;
@@ -27,7 +27,7 @@ public:
     vector<vector<float>> get_weights(){return weights;};
     int get_nb_neurons(){return nb_neurons;};
     int get_indice(){return indice;};
-    
+
     void set_outputs(vector<float> out);
     void set_inputs(vector<float> in);
 
