@@ -278,8 +278,6 @@ vector<float> pca(vector<float> origin_variables){
         sumProjection=0;
     }
 
-    std::cout << "ok" << std::endl;
-
     return pca_variables;
 }
 
