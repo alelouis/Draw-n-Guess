@@ -64,6 +64,7 @@ sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize){
     text.setFont(font);
     text.setCharacterSize(charSize);
     text.setOrigin(-xOrigin, -yOrigin);
+    text.setColor(sf::Color(0, 0, 0));
     text.setString(str);
     
     return text;

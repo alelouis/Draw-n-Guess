@@ -7,23 +7,29 @@
 //
 
 #include "Draw_window.hpp"
+#include "Header.h"
 using namespace std;
 
 Draw_window::Draw_window(){
     window = new sf::RenderWindow(sf::VideoMode(640, 640), "Draw-n-Guess");
+    window->setVerticalSyncEnabled(true);
     draw_zone_tex = new sf::Texture;
     draw_zone = new sf::Sprite;
     draw_zone_tex->create(640, 640);
     draw_zone->setTexture(*draw_zone_tex);
-    sf::Uint8 *pixels = new sf::Uint8[640*640*4];
     draw_mat = new deque<deque<int>>;;
     draw_mat->resize(32);
     for (int i=0; i<32; i++){
         (*draw_mat)[i].resize(32);
     }
     drawing = false;
-    active = true;
+    active = false;
+    guessText = simpleText("?", 10, 5, 50);
     
+}
+
+void Draw_window::run(){
+    sf::Uint8 *pixels = new sf::Uint8[640*640*4];
     while (active)
     {
         sf::Event event;
@@ -48,7 +54,6 @@ Draw_window::Draw_window(){
                 if (event.key.code == sf::Keyboard::Space)
                 {
                     active = false;
-                    window->close();
                 }
             }
             if (event.type == sf::Event::MouseButtonReleased){
@@ -77,16 +82,31 @@ Draw_window::Draw_window(){
         {
             for(int y = 0; y < 640; y++)
             {
-                pixels[(640 * y + x)*4] = (*draw_mat)[y/20][x/20]*255; // R
-                pixels[(640 * y + x)*4 + 1] = (*draw_mat)[y/20][x/20]*255; // G
-                pixels[(640 * y + x)*4+ 2] = (*draw_mat)[y/20][x/20]*255; // B
-                pixels[(640 * y + x)*4 + 3] = (*draw_mat)[y/20][x/20]*255; // A
+                pixels[(640 * y + x)*4] = !(*draw_mat)[y/20][x/20]*255; // R
+                pixels[(640 * y + x)*4 + 1] = !(*draw_mat)[y/20][x/20]*255; // G
+                pixels[(640 * y + x)*4+ 2] = !(*draw_mat)[y/20][x/20]*255; // B
+                pixels[(640 * y + x)*4 + 3] = !(*draw_mat)[y/20][x/20]*255; // A
             }
         }
         
         draw_zone_tex->update(pixels);
         window->clear();
         window->draw(*draw_zone);
+        window->draw(guessText);
         window->display();
     }
+}
+
+void Draw_window::set_active(bool b){
+    draw_mat->clear();
+    draw_mat = new deque<deque<int>>;
+    draw_mat->resize(32);
+    for (int i=0; i<32; i++){
+        (*draw_mat)[i].resize(32);
+    }
+    active = b;
+}
+
+void Draw_window::set_guess_text(string str){
+    guessText = simpleText(str, 10, 5, 50);
 }
