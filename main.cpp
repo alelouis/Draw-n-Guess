@@ -11,6 +11,7 @@ int main()
     vector<vector<float>> Ta = readMatFromFile("data_set/TA.txt");
     vector<vector<float>> Xtest = readMatFromFile("data_set/Xtest.txt");
     vector<vector<float>> Tt = readMatFromFile("data_set/TT.txt");
+    
     cout << "Training Neural Network... Please Wait..." << endl;
     DIGITnetwork->train_by_iteration(Xapp,Ta,1000);
     DIGITnetwork->test(Xtest,Tt);
@@ -21,11 +22,10 @@ int main()
         w->run();
 
         deque<deque<int>> data32 = *(w->get_draw_mat());
-
         deque<deque<int>> data32_centered = center_mat(data32);
         deque<deque<int>> data8 = compress_mat(data32_centered);
         vector<float> draw_variables = pca(normalize(extract_variables(data8)));
-
+        
         DIGITnetwork->sim(draw_variables);
         vector<float> current_output = DIGITnetwork->get_ffn_outputs();
         int guess = distance(current_output.begin(),

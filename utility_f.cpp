@@ -62,6 +62,29 @@ deque<deque<int>> readMatFromFileDeq(string str){
     return matAPP;
 }
 
+void write_mat_to_file(vector<vector<float>> vec, string name){
+    ofstream myfile;
+    myfile.open (name);
+    for(int i=0;i<vec.size();i++){
+        for(int j=0;j<vec[0].size();j++){
+            myfile << vec[i][j];
+            myfile << " ";
+        }
+        myfile << '\n';
+    }
+    myfile.close();
+}
+
+void write_vec_to_file(vector<float> vec, string name){
+    ofstream myfile;
+    myfile.open (name);
+    for(int i=0;i<vec.size();i++){
+            myfile << vec[i];
+            myfile << " ";
+        }
+    myfile.close();
+}
+
 sf::Text text;
 sf::Font font;
 sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize){

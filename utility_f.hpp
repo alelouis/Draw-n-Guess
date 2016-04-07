@@ -14,6 +14,9 @@ using namespace std;
 
 vector<vector<float>> readMatFromFile(string str);
 deque<deque<int>> readMatFromFileDeq(string str);
+void write_mat_to_file(vector<vector<float>> vec, string name);
+void write_vec_to_file(vector<float> vec, string name);
+
 sf::Text simpleText(std::string str,int xOrigin, int yOrigin, int charSize);
 
 #endif /* utility_f_hpp */
