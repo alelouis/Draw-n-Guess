@@ -18,3 +18,7 @@ Build with SFML
 
 ![alt tag](https://zippy.gfycat.com/FairUncomfortableDesertpupfish.gif)
 
+#### References
+- http://www.cs.bham.ac.uk/~jxb/NN/l7.pdf
+- http://www.di.unito.it/~cancelli/retineu06_07/FNN.pdf
+- ESEO Data Mining Project - M. Feuilloy
