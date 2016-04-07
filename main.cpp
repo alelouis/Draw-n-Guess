@@ -12,12 +12,16 @@ int main()
     vector<vector<float>> Xtest = readMatFromFile("data_set/Xtest.txt");
     vector<vector<float>> Tt = readMatFromFile("data_set/TT.txt");
     
+    vector<vector<float>> new_var_data;
+    vector<float> new_T_data;
+    
     cout << "Training Neural Network... Please Wait..." << endl;
     DIGITnetwork->train_by_iteration(Xapp,Ta,1000);
     DIGITnetwork->test(Xtest,Tt);
     Draw_window *w = new Draw_window();
+    float t;
 
-    while(1){
+    while(t<10){
         w->set_active(true);
         w->run();
 
@@ -25,6 +29,12 @@ int main()
         deque<deque<int>> data32_centered = center_mat(data32);
         deque<deque<int>> data8 = compress_mat(data32_centered);
         vector<float> draw_variables = pca(normalize(extract_variables(data8)));
+        
+        new_var_data.push_back(draw_variables);
+        cout << "Please enter an integer value: ";
+        
+        cin >> t;
+        new_T_data.push_back(t);
         
         DIGITnetwork->sim(draw_variables);
         vector<float> current_output = DIGITnetwork->get_ffn_outputs();
@@ -34,5 +44,8 @@ int main()
         cout << "Best Guess : " << guess << endl;
         w->set_guess_text(to_string(guess));
     }
+    
+    write_vec_to_file(new_T_data, "newX.txt");
+    write_mat_to_file(new_var_data, "newT.txt");
     return 0;
 }
