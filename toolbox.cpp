@@ -277,9 +277,6 @@ vector<float> pca(vector<float> origin_variables){
         pca_variables.push_back(sumProjection);
         sumProjection=0;
     }
-
-    std::cout << "ok" << std::endl;
-
     return pca_variables;
 }
 
