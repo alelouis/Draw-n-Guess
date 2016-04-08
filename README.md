@@ -2,7 +2,7 @@
 
 Neural network based digit recognition. Still in development.
 
-08/04/16 : Added self made database in `data-set/new/`. I wrote 1019 digits by hand (yea, I was determined), the classification rate went up from 94% to 98%. Now it has become really good at guessing my digits, shouldn't be as good with yours (do your own database with learn-mode !).
+08/04/16 : Added self made database in `data-set/new/`. I wrote 1019 digits by hand (yea, I was determined), the classification rate went up from 94% to 98%. Now it has become really good at guessing my digits, shouldn't be as good with yours (you can still do your own database with learn-mode but pca and normalization have to be done manually until I implement them).
 
 ```
 Hold left-button to draw
