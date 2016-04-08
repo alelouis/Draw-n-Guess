@@ -5,12 +5,12 @@ int main()
 {
 
     FFN *DIGITnetwork = new FFN();
-    DIGITnetwork->initFFN(44, 20, 10);
+    DIGITnetwork->initFFN(43, 20, 10);
 
-    vector<vector<float>> Xapp = readMatFromFile("data_set/Xapp.txt");
-    vector<vector<float>> Ta = readMatFromFile("data_set/TA.txt");
-    vector<vector<float>> Xtest = readMatFromFile("data_set/Xtest.txt");
-    vector<vector<float>> Tt = readMatFromFile("data_set/TT.txt");
+    vector<vector<float>> Xapp = readMatFromFile("data_set/new/Xapp.txt");
+    vector<vector<float>> Ta = readMatFromFile("data_set/new/TA.txt");
+    vector<vector<float>> Xtest = readMatFromFile("data_set/new/Xtest.txt");
+    vector<vector<float>> Tt = readMatFromFile("data_set/new/TT.txt");
     
     cout << "Training Neural Network... Please Wait..." << endl;
     DIGITnetwork->train_by_iteration(Xapp,Ta,1000);
