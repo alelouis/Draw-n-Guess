@@ -245,6 +245,7 @@ vector<float> extract_variables(deque<deque<int>> img){
     //Deletes useless variables (all zero)
 
     variables.erase(variables.begin() + 45);
+    variables.erase(variables.begin() + 38); //New data
     variables.erase(variables.begin() + 31);
     variables.erase(variables.begin() + 30);
     variables.erase(variables.begin() + 17);
@@ -257,8 +258,8 @@ vector<float> extract_variables(deque<deque<int>> img){
 }
 
 vector<float> normalize(vector<float> origin_variables){
-    vector<vector<float>> mu = readMatFromFile("data_set/mu.txt");
-    vector<vector<float>> sigma = readMatFromFile("data_set/sigma.txt");
+    vector<vector<float>> mu = readMatFromFile("data_set/new/mu.txt");
+    vector<vector<float>> sigma = readMatFromFile("data_set/new/sigma.txt");
     vector<float> norm_variables;
     for(int i=0;i<mu[0].size();i++){
         norm_variables.push_back((origin_variables[i]-mu[0][i])/sigma[0][i]);
@@ -267,7 +268,7 @@ vector<float> normalize(vector<float> origin_variables){
 }
 
 vector<float> pca(vector<float> origin_variables){
-    vector<vector<float>> pca = readMatFromFile("data_set/coef.txt");
+    vector<vector<float>> pca = readMatFromFile("data_set/new/coef.txt");
     vector<float> pca_variables;
     float sumProjection=0;
     for(int i=0; i<pca.size();i++){
