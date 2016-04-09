@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-
+    Draw_window *w = new Draw_window();
     FFN *DIGITnetwork = new FFN();
     DIGITnetwork->initFFN(43, 20, 10);
 
@@ -15,7 +15,7 @@ int main()
     cout << "Training Neural Network... Please Wait..." << endl;
     DIGITnetwork->train_by_iteration(Xapp,Ta,1000);
     DIGITnetwork->test(Xtest,Tt);
-    Draw_window *w = new Draw_window();
+    
 
     while(1){
         w->set_active(true);
@@ -23,6 +23,7 @@ int main()
 
         deque<deque<int>> data32 = *(w->get_draw_mat());
         deque<deque<int>> data32_centered = center_mat(data32);
+        affiche_mat(data32_centered, 32, 32);
         deque<deque<int>> data8 = compress_mat(data32_centered);
         vector<float> draw_variables = pca(normalize(extract_variables(data8)));
         

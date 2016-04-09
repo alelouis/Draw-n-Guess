@@ -128,20 +128,41 @@ deque<deque<int>> center_mat(deque<deque<int>> src_mat){
 
     delta_x = (marge_droite-marge_gauche)/2;
     delta_y = (marge_bas-marge_haut)/2;
+    cout << delta_x << endl;
+    cout << delta_y << endl;
     vec_zero.resize(src_mat.size());
     temp_size = src_mat.size();
-    // Colonnes de zeros
-    for(int i=0;i<delta_y;i++){
-        src_mat.push_front(vec_zero);
-    }
-    src_mat.resize(temp_size);
     // Lignes de zeros
-    for (int i=0; i<src_mat.size(); i++){
-        for(int j=0;j<delta_x;j++){
-            src_mat[i].push_front(0);
+    if(delta_y>0){
+        for(int i=0;i<delta_y;i++){
+            src_mat.push_front(vec_zero);
         }
-        src_mat[i].resize(temp_size);
+        src_mat.resize(temp_size);
+    }else{
+        for(int i=0;i<-delta_y+1;i++){
+            src_mat.push_back(vec_zero);
+        }
+        src_mat.erase(src_mat.begin(),src_mat.begin()-delta_y);
     }
+    
+    // Colonnes de zeros
+    if(delta_x>0){
+        for (int i=0; i<src_mat.size(); i++){
+            for(int j=0;j<delta_x;j++){
+                src_mat[i].push_front(0);
+            }
+            src_mat[i].resize(temp_size);
+        }
+    }else{
+        for (int i=0; i<src_mat.size(); i++){
+            for(int j=0;j<-delta_x+1;j++){
+                src_mat[i].push_back(0);
+                src_mat[i].erase(src_mat[i].begin());
+            }
+        }
+        
+    }
+    
 
     return src_mat;
 }

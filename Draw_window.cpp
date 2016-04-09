@@ -24,12 +24,17 @@ Draw_window::Draw_window(){
     }
     drawing = false;
     active = false;
-    guessText = simpleText("?", 10, 5, 50);
+    guessText = simpleText("?", 40, 20, 50);
     
 }
 
 void Draw_window::run(){
     sf::Uint8 *pixels = new sf::Uint8[640*640*4];
+    sf::RectangleShape guess_zone;
+    guess_zone.setSize(sf::Vector2f(72, 72));
+    guess_zone.setOutlineColor(sf::Color::Black);
+    guess_zone.setOutlineThickness(3);
+    guess_zone.setPosition(15, 15);
     while (active)
     {
         sf::Event event;
@@ -92,6 +97,7 @@ void Draw_window::run(){
         draw_zone_tex->update(pixels);
         window->clear();
         window->draw(*draw_zone);
+        window->draw(guess_zone);
         window->draw(guessText);
         window->display();
     }
@@ -108,5 +114,5 @@ void Draw_window::set_active(bool b){
 }
 
 void Draw_window::set_guess_text(string str){
-    guessText = simpleText(str, 10, 5, 50);
+    guessText = simpleText(str, 40, 20, 50);
 }
