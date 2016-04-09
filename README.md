@@ -21,6 +21,10 @@ Build with SFML
 
 ![alt tag](https://zippy.gfycat.com/FairUncomfortableDesertpupfish.gif)
 
+Another application with live camera input `github.com/wimacod/Camera-Guess.git`:
+
+![alt tag](http://i.imgur.com/uvEeY2s.png)
+
 #### References
 - http://www.cs.bham.ac.uk/~jxb/NN/l7.pdf
 - http://www.di.unito.it/~cancelli/retineu06_07/FNN.pdf
